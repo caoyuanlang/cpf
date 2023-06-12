@@ -3,8 +3,8 @@
     <div class="button">进出人流统计</div>
     <div class="more" @click="zhezhaoshow">更多</div>
     <div style="width: 480px; height: 500px; margin-left: 30px" id="main"></div>
-    <h2 class="h2">日均总入：</h2>
-    <h2 class="h2">七日内日均入：</h2>
+    <h2 class="h2">日均总入：{{ avgCount.avgCount }}人</h2>
+    <h2 class="h2">七日内日均入：{{ avgCount.avgSevenCount }}人</h2>
     <h2 class="h2">当前园区内总人数：</h2>
   </div>
 </template>
@@ -15,11 +15,17 @@ export default {
   data() {
     return {
       show: true,
+      avgCount: {
+        avgCount: "",
+        avgSevenCount: "",
+      },
     };
   },
   mounted() {
     // 初始化人流数据表
     this.initEcharts();
+    // 获取日均总入，七日内日均入
+    this.getAvgCount();
   },
   methods: {
     /**
@@ -60,7 +66,7 @@ export default {
           },
         },
         toolbox: {
-            right: "40",
+          right: "40",
           feature: {
             // dataView: {
             //   title: "数据视图",
@@ -104,7 +110,7 @@ export default {
         xAxis: [
           {
             type: "category",
-            data: time.splice(0,5).reverse(),
+            data: time.splice(0, 5).reverse(),
             axisLabel: {
               rotate: 50, // 将标签旋转角度设置为0
             },
@@ -137,7 +143,7 @@ export default {
                 return value + " 人";
               },
             },
-            data: inNumber.splice(0,5).reverse(),
+            data: inNumber.splice(0, 5).reverse(),
             label: {
               normal: {
                 show: true,
@@ -156,7 +162,7 @@ export default {
                 return value + " 人";
               },
             },
-            data: outNumber.splice(0,5).reverse(),
+            data: outNumber.splice(0, 5).reverse(),
             label: {
               normal: {
                 show: true,
@@ -187,6 +193,20 @@ export default {
      * @出口参数:
      * @函数备注:
      */
+
+    /**
+     * @函数功能: 获取日均总入，七日内日均入
+     * @出口参数:
+     * @函数备注:
+     */
+    async getAvgCount() {
+      let res = await this.$http.post(
+        this.$util.prodBaseUrl + "/api/number/avgCount"
+      );
+      if (res.code === 200) {
+        this.avgCount = res.data;
+      }
+    },
   },
 };
 </script>

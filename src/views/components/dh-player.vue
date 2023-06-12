@@ -1,8 +1,8 @@
 <!--
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-04-18 16:23:30
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-06-12 14:24:06
+ * @LastEditors: caoyuanling a2607954957@foxmail.com
+ * @LastEditTime: 2023-06-12 16:41:59
  * @FilePath: \vue\src\views\components\dh-player.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,7 +26,7 @@
         <DHPlayer
           videoId="dhplayer"
           ref="dhplayerRef"
-          :shieldClass="['dialog','zhezhao', 'el-message-box']"
+          :shieldClass="['dialog', 'zhezhao', 'el-message-box']"
           :windowType="windowType"
           :request="ajaxRequest"
           :showBar="false"
@@ -142,6 +142,7 @@ export default {
     this.$nextTick(() => {
       this.sumTime();
     });
+
   },
   async beforeDestroy() {
     // 标签关闭用当前时间减去进入页面时间统计出使用时长
@@ -272,6 +273,7 @@ export default {
         sessionStorage.sumTime = +new Date();
       }
     },
+ 
   },
 };
 </script>

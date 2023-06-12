@@ -140,7 +140,7 @@ export default {
      */
     async institution() {
       let res = await this.$http.post(
-        this.$util.prodBaseUrl + "/api/dict/list?TYPE=ORG"
+        this.$util.prodBaseUrl + "/system/dept/deptCount"
       );
       this.listArr = res;
     },
