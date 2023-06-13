@@ -1,8 +1,8 @@
 <!--
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-04-18 09:36:06
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-06-11 17:18:39
+ * @LastEditors: caoyuanling a2607954957@foxmail.com
+ * @LastEditTime: 2023-06-13 10:53:38
  * @FilePath: \vue\src\views\components\map.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -51,7 +51,7 @@ export default {
               backgroundColor: "white",
               padding: 10,
               extraCssText:
-                "box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);border-radius: 24px;opacity: 0.8;border: 2px solid white;width: 174px;height: 140px;",
+                "background-image:url("+import("@/assets/dh-bg/框.png")+");  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);border-radius: 24px;opacity: 0.8;border: 2px solid white;width: 174px;height: 140px;",
               textStyle: {
                 color: "red",
               },

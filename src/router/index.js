@@ -1,8 +1,8 @@
 /*
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-04-17 09:47:30
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-06-09 15:51:18
+ * @LastEditors: caoyuanling a2607954957@foxmail.com
+ * @LastEditTime: 2023-06-13 10:18:25
  * @FilePath: \vue\src\router\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -88,6 +88,13 @@ const routes = [
       name: "role",
       component: () => import("@/views/system/role"),
       meta: { title: "角色管理-青岛公积金-中国中商银行青岛市分行2199智慧信贷系统-后台管理" },
+
+    },
+    {
+      path: "system/project",
+      name: "project",
+      component: () => import("@/views/system/project"),
+      meta: { title: "项目管理-青岛公积金-中国中商银行青岛市分行2199智慧信贷系统-后台管理" },
 
     },
     {

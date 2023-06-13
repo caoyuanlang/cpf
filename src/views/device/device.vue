@@ -1,8 +1,8 @@
 <!--
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-05-17 10:09:22
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-06-12 11:49:03
+ * @LastEditors: caoyuanling a2607954957@foxmail.com
+ * @LastEditTime: 2023-06-13 16:05:52
  * @FilePath: \vue - v2.0\src\views\device\device.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -56,7 +56,7 @@
       </template>
     </comTableList>
 
-    <el-dialog title="设备绑定" :visible.sync="dialogVisible" width="30%" >
+    <el-dialog title="设备绑定" :visible.sync="dialogVisible" width="30%">
       <el-form
         :model="ruleForm"
         :rules="rules"
@@ -65,7 +65,7 @@
         class="demo-ruleForm"
       >
         <el-form-item label="区域编码" prop="regionCode">
-          <el-select v-model="ruleForm.regionCode" placeholder="请选择" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.regionCode" placeholder="请选择">
             <el-option
               v-for="(item, index) in regions"
               :key="index"
@@ -75,7 +75,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="选择机构" prop="orgCode">
-          <el-select v-model="ruleForm.orgCode" placeholder="请选择" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.orgCode" placeholder="请选择">
             <el-option
               v-for="(item, index) in org"
               :key="index"
@@ -85,7 +85,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="选择区域" prop="location">
-          <el-select v-model="ruleForm.location" placeholder="请选择" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.location" placeholder="请选择">
             <el-option
               v-for="(item, index) in location"
               :key="index"
@@ -95,7 +95,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="选择项目" prop="projectId">
-          <el-select v-model="ruleForm.projectId" placeholder="请选择" @change="$forceUpdate()">
+          <el-select v-model="ruleForm.projectId" placeholder="请选择">
             <el-option
               v-for="(item, index) in projects"
               :key="index"
@@ -104,9 +104,8 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="设备描述" >
+        <el-form-item label="设备描述">
           <el-input
-          @input="$forceUpdate()"
             type="textarea"
             :rows="2"
             maxlength="50"
@@ -135,7 +134,7 @@ export default {
       dialogVisible: false,
       seachList: {},
       tableData: [],
-      disabled:true,
+      disabled: true,
       columnObj: {
         columnData: [
           { prop: "userName", label: "管理员", width: "" },
@@ -165,7 +164,7 @@ export default {
         location: "",
         projectId: "",
         id: "",
-        discribe:''
+        discribe: "",
       },
       rules: {
         regionCode: [
@@ -174,9 +173,7 @@ export default {
         orgCode: [
           { required: true, message: "请选择组织编码", trigger: "blur" },
         ],
-        location: [
-          { required: true, message: "请选择区域", trigger: "blur" },
-        ],
+        location: [{ required: true, message: "请选择区域", trigger: "blur" }],
         projectId: [
           { required: true, message: "请选择项目编码", trigger: "blur" },
         ],
@@ -280,7 +277,8 @@ export default {
      */
     async getproject() {
       let res = await this.$http.post(
-        this.$util.prodBaseUrl + "/api/projectInfo/list"
+        this.$util.prodBaseUrl + "/api/projectInfo/list",
+        {}
       );
       this.$nextTick(() => {
         this.projects = res.rows;
@@ -288,24 +286,28 @@ export default {
     },
     binding() {
       this.dialogVisible = true;
-      this.$nextTick(() => {
-        this.ruleForm = this.row;
-      });
       this.getRegionCode();
       this.getRegions();
       this.getInstitution();
       this.getproject();
+      this.$nextTick(() => {
+        this.ruleForm.regionCode = this.row.regionCode;
+        this.ruleForm.orgCode = this.row.orgCode;
+        this.ruleForm.location = this.row.location;
+        this.ruleForm.projectId = this.row.projectId;
+        this.ruleForm.discribe = this.row.discribe;
+      });
     },
 
     currentChange(row) {
-      this.disabled=false;
+      this.disabled = false;
       this.row.regionCode = row.regionCode;
-      this.row.orgCode = row.orgCode;
+      this.row.orgCode = row.orgCode ? parseInt(row.orgCode) : row.orgCode;
       this.row.location = row.location;
       this.row.projectId = row.projectId;
       this.ruleForm.id = row.id;
       this.row.id = row.id;
-      this.row.discribe=row.discribe;
+      this.row.discribe = row.discribe;
     },
 
     /**
@@ -331,11 +333,12 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.dialogVisible = false;
-      this.disabled=true;
+      this.disabled = true;
     },
 
     resetting() {
       this.seachList = {};
+      this.deviceList();
     },
   },
 };
