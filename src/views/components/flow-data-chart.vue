@@ -5,7 +5,7 @@
     <div style="width: 480px; height: 500px; margin-left: 30px" id="main"></div>
     <h2 class="h2">日均总入：{{ avgCount.avgCount }}人</h2>
     <h2 class="h2">七日内日均入：{{ avgCount.avgSevenCount }}人</h2>
-    <h2 class="h2">当前园区内总人数：</h2>
+    <h2 class="h2">当前园区内总人数：{{avgCount.inNumber}}</h2>
   </div>
 </template>
 
@@ -203,8 +203,12 @@ export default {
       let res = await this.$http.post(
         this.$util.prodBaseUrl + "/api/number/avgCount"
       );
+      let request = await this.$http.post(
+        this.$util.prodBaseUrl + "/api/number/pepoleCounting"
+      );
       if (res.code === 200) {
         this.avgCount = res.data;
+        this.avgCount.inNumber = request.inNumber;
       }
     },
   },

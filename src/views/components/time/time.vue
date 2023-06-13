@@ -1,8 +1,8 @@
 <!--
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-05-29 15:27:58
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-06-09 12:15:32
+ * @LastEditors: caoyuanling a2607954957@foxmail.com
+ * @LastEditTime: 2023-06-13 09:29:21
  * @FilePath: \vue - v2.0\src\views\components\time\time.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -74,7 +74,7 @@ export default {
 }
 .user {
   top: 4px;
-  right: 120px;
+  right: 110px;
   cursor: pointer;
 }
 </style>
