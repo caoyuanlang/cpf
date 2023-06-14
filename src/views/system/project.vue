@@ -2,7 +2,7 @@
  * @Author: caoyuanling a2607954957@foxmail.com
  * @Date: 2023-06-13 10:12:52
  * @LastEditors: caoyuanling a2607954957@foxmail.com
- * @LastEditTime: 2023-06-13 16:47:11
+ * @LastEditTime: 2023-06-14 10:28:02
  * @FilePath: \vue - v2.0\src\views\system\project.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -64,7 +64,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="机构名称" prop="orgName">
-          <el-select v-model="formData.orgNameCopy" placeholder="请选择机构">
+          <el-select v-model="formData.orgName" placeholder="请选择机构">
             <el-option
               v-for="(item, index) in org"
               :key="index"
@@ -137,12 +137,12 @@ export default {
         orgName: {
           required: true,
           message: "请选择机构名称",
-          trigger: "blur",
+          trigger: "change",
         },
         location: {
           required: true,
           message: "请选择所在区域",
-          trigger: "blur",
+          trigger: "change",
         },
       },
     };
@@ -226,19 +226,26 @@ export default {
      * @出口参数:
      * @函数备注:
      */
-    async increase() {
-      this.formData.orgName = this.formData.orgNameCopy[1];
-      this.formData.orgId = this.formData.orgNameCopy[0];
+    increase() {
+      this.$refs['ruleForm'].validate(async (valid) => {
+        if (valid) {
+          this.formData.orgName = this.formData.orgNameCopy[1];
+          this.formData.orgId = this.formData.orgNameCopy[0];
 
-      let res = await this.$http.post(
-        this.$util.prodBaseUrl + "/api/projectInfo/add",
-        this.formData
-      );
-      this.dialogVisible = false;
+          let res = await this.$http.post(
+            this.$util.prodBaseUrl + "/api/projectInfo/add",
+            this.formData
+          );
+          this.dialogVisible = false;
 
-      if (res.data.code === 200) {
-      }
-      this.initialization();
+          if (res.data.code === 200) {
+          }
+          this.initialization();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
 
     initialization() {
